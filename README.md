@@ -78,7 +78,7 @@ The final Marts layer enabled deep-dive analytics into the Brazilian market.
 ---
 
 ## 🛠️ How to Run
-1. **Clone the Repo:** `git clone https://github.com/sunilmakkar/your-repo-name`
+1. **Clone the Repo:** `git clone https://github.com/sunilmakkar/olist-e-commerce-data-pipeline.git`
 2. **Setup Environment:** `pip install -r requirements.txt`
 3. **Run Pipeline:**
     * Execute the `olist_ecommerce_pipeline.ipynb` to ingest data.
