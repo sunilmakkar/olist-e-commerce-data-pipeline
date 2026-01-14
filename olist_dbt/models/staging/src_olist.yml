@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: olist_raw
+    schema: raw 
+    tables:
+      - name: customers
+      - name: orders
+        identifier: v_orders
+        loaded_at_field: order_purchase_timestamp_typed
+        freshness:
+          warn_after: {count: 2800, period: day}
+          error_after: {count: 3000, period: day}
+      - name: order_items
+      - name: products
+      - name: sellers
+      - name: order_payments
+      - name: order_reviews
+      - name: geolocation
+      - name: product_category_name_translation

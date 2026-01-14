@@ -1,0 +1,11 @@
+# Data Ingestion & Analysis
+pandas
+duckdb
+plotly
+
+# Transformation & Orchestration
+dbt-core
+dbt-duckdb
+
+# Notebook Environment
+ipykernel
