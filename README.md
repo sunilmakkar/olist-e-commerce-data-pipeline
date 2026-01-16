@@ -40,7 +40,7 @@ To optimize the warehouse for analytics, I implemented a **Kimball Star Schema**
 ### Schema Diagram (Star Schema)
 Below is the relationship diagram generated from the `marts` layer:
 
-![Olist Star Schema](/assets/olist-erd.png)
+![Olist Star Schema](/assets/olist_erd.png)
 
 ### Relationship Mapping (Star Schema)
 Below is the table layout of the Olist Star Schema:
@@ -85,6 +85,25 @@ The final Marts layer enabled deep-dive analytics into the Brazilian market.
     * Run `dbt deps` to install dependencies.
     * Run `dbt run` to build the models.
     * Run `dbt test` to verify data quality.
+
+---
+
+## 🚀 Production & Scalability Considerations
+While this project uses a historical dataset (static snapshots), it is architected with production-grade standards in mind. Below is how this pipeline would transition to a live enterprise environment:
+
+### 1. Source Freshness & SLAs
+In the current project, `freshness` thresholds are set to a high offset (2800+ days) due to the historical nature of the data. 
+* **In Production:** I would implement strict SLAs (e.g., 12-hour warning / 24-hour error). 
+* **Impact:** This ensures immediate detection of upstream API failures or ingestion delays, which is critical for operational e-commerce dashboards.
+
+### 2. Historical Tracking (SCD Type 2)
+Currently, `dim_customers` and `dim_sellers` use SCD Type 1 logic (overwriting changes).
+* **In Production:** I would implement **dbt Snapshots** to enable **SCD Type 2** tracking for geographic attributes.
+* **Impact:** In a real-world scenario, customers move. SCD Type 2 allows us to attribute a sale to where the customer lived *at the time of purchase*, rather than their current location, ensuring accurate regional tax and marketing attribution.
+
+### 3. CI/CD & Slim CI
+To scale this project in a team setting, I would implement **Slim CI** using dbt Cloud or GitHub Actions.
+* **Impact:** This would ensure that only modified models and their downstream dependencies are tested during Pull Requests, saving compute costs and accelerating the development lifecycle.
 
 ---
 
