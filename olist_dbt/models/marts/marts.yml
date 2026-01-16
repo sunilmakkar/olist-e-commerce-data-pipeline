@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: fct_orders_items
-    description: "The most granular sales table. One row per item sold, including price, freight, and English category names."
+    description: "The most granular sales table. One row per item sold, including price, and freight."
     columns:
       - name: order_item_key
         description: "Primary key: Combination of order_id and item_sequence"
@@ -15,10 +15,6 @@ models:
           - relationships:
               to: ref('stg_olist__orders')
               field: order_id
-      - name: category_name_en
-        description: "English translation of the product category"
-        tests:
-          - not_null
 
   - name: dim_products
     description: "Dimension table for products with English category mapping."
@@ -27,6 +23,19 @@ models:
         tests:
           - unique
           - not_null
+      - name: category_name_en
+        description: "English translation of the product category. Source of truth for product classification."
+        tests:
+          - not_null
+      - name: product_weight_g
+        description: "Product weight in grams."
+      - name: product_length_cm
+        description: "Product length in centimeters."
+      - name: product_height_cm
+        description: "Product height in centimeters."
+      - name: product_width_cm
+        description: "Product width in centimeters."
+      
 
   - name: dim_customers
     description: "Dimension table for customers and their geographic location."

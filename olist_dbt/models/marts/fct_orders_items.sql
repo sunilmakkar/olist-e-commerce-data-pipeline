@@ -15,8 +15,7 @@ final as (
         orders.customer_id,
         orders.purchased_at,
         order_items.price,
-        order_items.freight_amount,
-        order_items.category_name_en
+        order_items.freight_amount
     from order_items
     inner join orders on order_items.order_id = orders.order_id
 )
